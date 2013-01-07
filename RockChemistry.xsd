@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 (x64) (http://www.altova.com) by Ryan Clark (private) -->
+<xs:schema xmlns:aasg="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/rockchemistry/0.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gmlsf="http://www.opengis.net/gmlsf" targetNamespace="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/rockchemistry/0.4" elementFormDefault="qualified" version="00.03">
+	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
+	<xs:annotation>
+		<!--This XSD document, including XML schema, indicates the content requested for AASG geothermal data interoperable web services for description of rock chemistry data. In the geothermal data system, chemical observations are one of the observation services that are used as a method to discover resources derived from physical samples with particular characteristics. Each chemical analysis observation should have a unique AnalysisURI and a corresponding SamplingFeatureURI-->
+		<!--This XSD document was created on 2012-11-09 by Christy Caudill, AZGS.  This schema is based on the data available in the AASG Web Feature Services created for rock chemistry. -->
+		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
+			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
+			<gmlsf:GMLProfileSchema>
+http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gmlsf:GMLProfileSchema>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:element name="U-Series" type="aasg:U-SeriesChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="IsotopeSeries" type="aasg:IsotopeSeriesChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="TraceElements" type="aasg:TraceMetalsChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="WRMajorElements" type="aasg:WholeRockChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="StableIsotopes" type="aasg:StableIsotopeChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="RareEarth" type="aasg:RareEarthChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="Volatiles" type="aasg:VolatileChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="NobleGases" type="aasg:NobleGasChemType" substitutionGroup="gml:_Feature"/>
+	<xs:complexType name="SampleAnalysisCommonType">
+		<xs:complexContent>
+			<xs:extension base="gml:AbstractFeatureType">
+				<xs:sequence>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="AnalysisURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="AnalysisName" type="xs:string"/>
+					<xs:element name="OtherAnalysisID" type="xs:string" minOccurs="0"/>
+					<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+					<xs:element name="DetectionLimitURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="SamplingFeatureName" type="xs:string" minOccurs="0"/>
+					<xs:element name="SamplingFeatureURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="SpecimenID" type="xs:string" minOccurs="0"/>
+					<xs:element name="OtherSpecimenID" type="xs:string" minOccurs="0"/>
+					<xs:element name="SpecimenURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="ParentSampleURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Label" type="xs:string"/>
+					<xs:element name="SpecimenCollectionDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="SpecimenLabel" type="xs:string" minOccurs="0"/>
+					<xs:element name="SpecimenDescription" type="xs:string" minOccurs="0"/>
+					<xs:element name="SampleCollectionMethod" type="xs:string" minOccurs="0"/>
+					<xs:element name="SpecimenType" type="xs:string" minOccurs="0"/>
+					<xs:element name="SpecimenCollector" type="xs:string" minOccurs="0"/>
+					<xs:element name="MaterialClass" type="xs:string" minOccurs="0"/>
+					<xs:element name="LithologyTerms" type="xs:string" minOccurs="0"/>
+					<xs:element name="RockName" type="xs:string"/>
+					<xs:element name="SampledGeologicUnit" type="xs:string"/>
+					<xs:element name="SampledGeologicUnitAge" type="xs:string" minOccurs="0"/>
+					<xs:element name="County" type="xs:string"/>
+					<xs:element name="State" type="xs:string"/>
+					<xs:element name="LatDegree" type="xs:double"/>
+					<xs:element name="LongDegree" type="xs:double"/>
+					<xs:element name="SRS" type="xs:string"/>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string"/>
+					<xs:element name="LocalityTerms" type="xs:string" minOccurs="0"/>
+					<xs:element name="DatumElevation" type="xs:string" minOccurs="0"/>
+					<xs:element name="Elevation" type="xs:double" minOccurs="0"/>
+					<xs:element name="ElevationUnits" type="xs:string" minOccurs="0"/>
+					<xs:element name="Citation" type="xs:string" minOccurs="0"/>
+					<xs:element name="Source" type="xs:string"/>
+					<xs:element name="MetadataURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0"/>
+					<xs:element name="AnalysisType" type="xs:string"/>
+					<xs:element name="AnalysisDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="Laboratory" type="xs:string" minOccurs="0"/>
+					<xs:element name="ProcedureSummary" type="xs:string" minOccurs="0"/>
+					<xs:element name="UpdateTimeStamp" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="U-SeriesChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Pb210_Ra226" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb210_u238" type="xs:double" minOccurs="0"/>
+					<xs:element name="Po210_Rn222" type="xs:double" minOccurs="0"/>
+					<xs:element name="Po210_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ra226_Th228" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ra226_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ra228_Th232" type="xs:double" minOccurs="0"/>
+					<xs:element name="Rn222_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th230_Ra226" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th230_Ra232" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th230_U238" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th232_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th232_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th232_U238" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th238_U238" type="xs:double" minOccurs="0"/>
+					<xs:element name="U234_U238" type="xs:double" minOccurs="0"/>
+					<xs:element name="U235_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="U238_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="U238_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="U238_Th232" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IsotopeSeriesChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Be10_Be" type="xs:double" minOccurs="0"/>
+					<xs:element name="Be10_Be9" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cl36_Cl" type="xs:double" minOccurs="0"/>
+					<xs:element name="Epsilon_Nd" type="xs:double" minOccurs="0"/>
+					<xs:element name="Hf176_Hf177" type="xs:double" minOccurs="0"/>
+					<xs:element name="K40_Ar36" type="xs:double" minOccurs="0"/>
+					<xs:element name="Lu176_Hf177" type="xs:double" minOccurs="0"/>
+					<xs:element name="Nd143_Nd144" type="xs:double" minOccurs="0"/>
+					<xs:element name="Os184_Os188" type="xs:double" minOccurs="0"/>
+					<xs:element name="Os186_Os188" type="xs:double" minOccurs="0"/>
+					<xs:element name="Os187_Os186" type="xs:double" minOccurs="0"/>
+					<xs:element name="Os187_Os188" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb206_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb206_Pb207" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb206_Pb208" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb207_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb208_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb208_Pb206" type="xs:double" minOccurs="0"/>
+					<xs:element name="Rb87_Sr86" type="xs:double" minOccurs="0"/>
+					<xs:element name="Re187_Os186" type="xs:double" minOccurs="0"/>
+					<xs:element name="Re187_Os188" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sm147_Nd144" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sr87_Sr86" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TraceMetalsChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Ag_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="As_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ba_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Be_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Bi_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Co_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cs_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cu_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Dy_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ga_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ge_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="In_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Mo_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Nb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ni_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Rb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sc_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sn_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ti_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="U_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="V_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="W_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Y_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Zn_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Zr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WholeRockChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Al2O3_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="CaO_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="Fe2O3_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="H2O_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="K2O_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="LOI_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="MgO_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="MnO_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="Na2O_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="P2O5_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="SiO2_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="TiO2_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="Total_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StableIsotopeChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Delta_18O" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RareEarthChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Ce_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Dy_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Er_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Eu_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Gd_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Hf_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ho_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="La_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Lu_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Nd_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sm_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ta_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Tb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Tm_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Yb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="VolatileChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="CO2" type="xs:double" minOccurs="0"/>
+					<xs:element name="F" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cl" type="xs:double" minOccurs="0"/>
+					<xs:element name="H" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NobleGasChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Ar36_Ar39" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar37_Ar39" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar37_Ar40" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar38_Ar36" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar39_Ar36" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar40" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar40_Ar36" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar40_Ar39" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar40_K40" type="xs:double" minOccurs="0"/>
+					<xs:element name="He3_He4" type="xs:double" minOccurs="0"/>
+					<xs:element name="He4_He3" type="xs:double" minOccurs="0"/>
+					<xs:element name="He4_Ne20" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr78_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr80_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr82_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr83_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr86_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ne20_Ne22" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ne21_Ne20" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ne21_Ne22" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ne22_Ne20" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe124_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe124_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe126_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe126_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe128_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe128_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe129_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe129_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe130_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe131_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe131_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe132_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe134_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe134_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe136_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe136_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
