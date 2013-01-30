@@ -330,17 +330,17 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
-		</xs:complexType>
-		<xs:complexType name="SingleAnalyteChemType">
+	</xs:complexType>
+	<xs:complexType name="SingleAnalyteChemType">
 		<xs:complexContent>
 			<xs:extension base="aasg:SampleAnalysisCommonType">
 				<xs:sequence>
-					<xs:element name="analyte" type="xs:string"/>
-					<xs:element name="result" type="xs:string"/>
-					<xs:element name="units" type="xs:string"/>
-					<xs:element name="uncertainty" type="xs:string"/>
-					<xs:element name="qualifier" type="xs:string"/>
-					<xs:element name="meaurementMethod" type="xs:string"/>
+					<xs:element name="analyte" type="xs:string" minOccurs="0"/>
+					<xs:element name="result" type="xs:string" minOccurs="0"/>
+					<xs:element name="units" type="xs:string" minOccurs="0"/>
+					<xs:element name="uncertainty" type="xs:string" minOccurs="0"/>
+					<xs:element name="qualifier" type="xs:string" minOccurs="0"/>
+					<xs:element name="meaurementMethod" type="xs:string" minOccurs="0"/>
 					<xs:element name="Au_ppb" type="xs:double" minOccurs="0"/>
 					<xs:element name="Br_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Cd_ppm" type="xs:double" minOccurs="0"/>
