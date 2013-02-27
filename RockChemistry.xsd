@@ -5,7 +5,7 @@
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
 		<!--This XSD document, including XML schema, indicates the content requested for AASG geothermal data interoperable web services for description of rock chemistry data. In the geothermal data system, chemical observations are one of the observation services that are used as a method to discover resources derived from physical samples with particular characteristics. Each chemical analysis observation should have a unique AnalysisURI and a corresponding SamplingFeatureURI-->
-		<!--This XSD document was created on 2013-01-28 by Christy Caudill, AZGS.  This schema is based on the data available in the AASG Web Feature Services created for rock chemistry. Edited to include Single Analyte suite.-->
+		<!--This XSD document was created on 2013-01-28 by Christy Caudill, AZGS; edited 2/27/2013.  This schema is based on the data available in the AASG Web Feature Services created for rock chemistry. Edited to include Single Analyte suite.-->
 		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
 			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
 			<gmlsf:GMLProfileSchema>
@@ -13,14 +13,14 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 		</xs:appinfo>
 	</xs:annotation>
 	<xs:element name="U-Series" type="aasg:U-SeriesChemType" substitutionGroup="gml:_Feature"/>
-	<xs:element name="IsotopeSeries" type="aasg:IsotopeSeriesChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="Isotopes" type="aasg:IsotopeSeriesChemType" substitutionGroup="gml:_Feature"/>
 	<xs:element name="TraceElements" type="aasg:TraceMetalsChemType" substitutionGroup="gml:_Feature"/>
 	<xs:element name="WRMajorElements" type="aasg:WholeRockChemType" substitutionGroup="gml:_Feature"/>
 	<xs:element name="StableIsotopes" type="aasg:StableIsotopeChemType" substitutionGroup="gml:_Feature"/>
-	<xs:element name="RareEarth" type="aasg:RareEarthChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="RareEarths" type="aasg:RareEarthChemType" substitutionGroup="gml:_Feature"/>
 	<xs:element name="Volatiles" type="aasg:VolatileChemType" substitutionGroup="gml:_Feature"/>
 	<xs:element name="NobleGases" type="aasg:NobleGasChemType" substitutionGroup="gml:_Feature"/>
-	<xs:element name="SingleAnalyte" type="aasg:SingleAnalyteChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="SingleAnalytes" type="aasg:SingleAnalyteChemType" substitutionGroup="gml:_Feature"/>
 	<xs:complexType name="SampleAnalysisCommonType">
 		<xs:complexContent>
 			<xs:extension base="gml:AbstractFeatureType">
@@ -197,6 +197,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 					<xs:element name="Sc_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Sn_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Sr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ta_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Ti_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="U_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="V_ppm" type="xs:double" minOccurs="0"/>
@@ -258,11 +259,14 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 					<xs:element name="La_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Lu_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Nd_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pm_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Pr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sc_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Sm_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Ta_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Tb_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Tm_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Y_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Yb_ppm" type="xs:double" minOccurs="0"/>
 					<xs:element name="Shape" type="gml:PointPropertyType"/>
 					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
