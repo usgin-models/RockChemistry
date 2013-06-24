@@ -12,7 +12,7 @@
 http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gmlsf:GMLProfileSchema>
 		</xs:appinfo>
 	</xs:annotation>
-	<xs:element name="U-Series" type="aasg:U-SeriesChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="USeries" type="aasg:USeriesChemType" substitutionGroup="gml:_Feature"/>
 	<xs:element name="Isotopes" type="aasg:IsotopeSeriesChemType" substitutionGroup="gml:_Feature"/>
 	<xs:element name="TraceElements" type="aasg:TraceMetalsChemType" substitutionGroup="gml:_Feature"/>
 	<xs:element name="WRMajorElements" type="aasg:WholeRockChemType" substitutionGroup="gml:_Feature"/>
@@ -108,7 +108,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="U-SeriesChemType">
+	<xs:complexType name="USeriesChemType">
 		<xs:complexContent>
 			<xs:extension base="aasg:SampleAnalysisCommonType">
 				<xs:sequence>
