@@ -5,7 +5,7 @@
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
 		<!--This XSD document, including XML schema, indicates the content requested for AASG geothermal data interoperable web services for description of rock chemistry data. In the geothermal data system, chemical observations are one of the observation services that are used as a method to discover resources derived from physical samples with particular characteristics. Each chemical analysis observation should have a unique AnalysisURI and a corresponding SamplingFeatureURI-->
-		<!--Annotated version 0.4.1. This XSD document was created on 2013-01-28 by Christy Caudill, AZGS; edited 2/27/2013. This schema is based on the data available in the AASG Web Feature Services created for rock chemistry. Edited to include Single Analyte suite. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS.-->
+		<!--Annotated version 0.4.1. "dateTime" data types were indicated in version 0.4.2. This XSD document was created on 2013-01-28 by Christy Caudill, AZGS; edited 2/27/2013. This schema is based on the data available in the AASG Web Feature Services created for rock chemistry. Edited to include Single Analyte suite. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS.-->
 		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
 			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
 			<gmlsf:GMLProfileSchema>
@@ -29,7 +29,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 						<xs:annotation>
 							<xs:documentation>Integer record count, added by ArcGIS servers during service deployment; not required but cannot be removed when deploying from ArcGIS feature class. Not user maintained, so this element appears in XML implementation but not in the Content Model Template.</xs:documentation>
 						</xs:annotation>
-						</xs:element>
+					</xs:element>
 					<xs:element name="AnalysisURI">
 						<xs:annotation>
 							<xs:documentation>A unique identifier for a discrete analysis of a specimen taken from a feature. The feature from which the specimen was taken will be identified by its own URI.</xs:documentation>
@@ -115,7 +115,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 							<xs:documentation>Short text string for labeling the feature on maps. Can be the same as feature name. A label may be an OtherLocationName, OtherID or the Name or some combination.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="SpecimenCollectionDate" type="xs:string" minOccurs="0">
+					<xs:element name="SpecimenCollectionDate" type="xs:dateTime" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Date on which specimen sample was collected. Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
 						</xs:annotation>
@@ -250,7 +250,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 							<xs:documentation>Type of analysis used to obtain the results in this record.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="AnalysisDate" type="xs:string" minOccurs="0">
+					<xs:element name="AnalysisDate" type="xs:dateTime" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Date for the record (date on which measurement or test was made. Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
 						</xs:annotation>
@@ -265,7 +265,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 							<xs:documentation>Text description of how the measurement was made - instrumentation, logging rate, correction or extrapolation process, how time since circulation was determined, etc. Data provider should indicate QA/QC performed on the data, including individual or institution, time frame and depth of quality check.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="UpdateTimeStamp" type="xs:string">
+					<xs:element name="UpdateTimeStamp" type="xs:dateTime">
 						<xs:annotation>
 							<xs:documentation>Date of last time line of data was updated or corrected by the service provider.(Format: 2012-06-22T00:00).</xs:documentation>
 						</xs:annotation>
