@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 (x64) (http://www.altova.com) by Laura Bookman (private) -->
+<xs:schema xmlns:aasg="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/rockchemistry/0.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gmlsf="http://www.opengis.net/gmlsf" targetNamespace="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/rockchemistry/0.4" elementFormDefault="qualified" version="00.03">
+	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
+	<xs:annotation>
+		<!--This XSD document, including XML schema, indicates the content requested for AASG geothermal data interoperable web services for description of rock chemistry data. In the geothermal data system, chemical observations are one of the observation services that are used as a method to discover resources derived from physical samples with particular characteristics. Each chemical analysis observation should have a unique AnalysisURI and a corresponding SamplingFeatureURI-->
+		<!--Annotated version 0.4.1. "dateTime" data types were indicated in version 0.4.2. This XSD document was created on 2013-01-28 by Christy Caudill, AZGS; edited 2/27/2013. This schema is based on the data available in the AASG Web Feature Services created for rock chemistry. Edited to include Single Analyte suite. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS.-->
+		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
+			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
+			<gmlsf:GMLProfileSchema>
+http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gmlsf:GMLProfileSchema>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:element name="USeries" type="aasg:USeriesChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="Isotopes" type="aasg:IsotopeSeriesChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="TraceElements" type="aasg:TraceMetalsChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="WRMajorElements" type="aasg:WholeRockChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="StableIsotopes" type="aasg:StableIsotopeChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="RareEarths" type="aasg:RareEarthChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="Volatiles" type="aasg:VolatileChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="NobleGases" type="aasg:NobleGasChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="SingleAnalytes" type="aasg:SingleAnalyteChemType" substitutionGroup="gml:_Feature"/>
+	<xs:element name="MineralRecoveryBrine" type="aasg:MineralRecoveryBrineChemType" substitutionGroup="gml:_Feature"/>
+	<xs:complexType name="SampleAnalysisCommonType">
+		<xs:complexContent>
+			<xs:extension base="gml:AbstractFeatureType">
+				<xs:sequence>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Integer record count, added by ArcGIS servers during service deployment; not required but cannot be removed when deploying from ArcGIS feature class. Not user maintained, so this element appears in XML implementation but not in the Content Model Template.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="AnalysisURI">
+						<xs:annotation>
+							<xs:documentation>A unique identifier for a discrete analysis of a specimen taken from a feature. The feature from which the specimen was taken will be identified by its own URI.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="AnalysisName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The human-intelligible name of the analysis. May be a concatenation of analysis type, feature name, and specimen label. This element is specific, not generic; i.e., do not use generic terms such as "Analyte Analysis".</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OtherAnalysisID" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Alternative identifier(s) for this analysis. Indicate the authority from which the OtherID is derived with a short (lower case) prefix delimited by a colon ':' If identifiers from multiple different authorities are available, delimit these identifiers with the pipe '|' character. For example, if a well were known to the Arizona Geological Survey (AZGS) by the id number 1337, the prefix would be azgs: and the identifier string would be azgs:1337. Any such prefixes used to scope identifiers should be explained in the dataset metadata.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Notes" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Any additional information to be provided, including description and other data not captured by the template, details about methods, contact information for related parties (original collector, project PI), collection platform or Launch, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DetectionLimitURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Unique identifier that specifies the Limits of the test. Ideally, the identifier is an http URI that will dereference to a known, useful representation of the feature. This identifier will be used to cross reference the feature to other information related to this feature. Unique identifier for each set of samples, each analyzed using the same method, technique and using the same equipment.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="SamplingFeatureName" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Common or human-readable name by which the feature is known. Recommend using only web-safe characters (a-z A-Z 0-9 _-.) in the name. Be consistent in the naming convention used within any given dataset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SamplingFeatureURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Unique Identifier for the particular site (station) or well where the sample(s) came from. For wells, this might be the HeaderURI or API number used in other metadata files. If unavailable, state 'missing'. SamplingFeature is a concept that represents the feature that accesses the part of the Earth from which the sample came, e.g. outcrop, borehole, dredge haul.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="SpecimenID" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>ID given to the specimen by the collector(s). Recommended practice: include a short abbreviation in a prefix indicating the authority or scope of the identifier (e.g. 'usgs:'); any prefixes should be explained in the dataset metadata.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OtherSpecimenID" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Alternative identifier(s) for the feature. Indicate the authority from which the OtherID is derived with a short (lower case) prefix delimited by a colon ':' If identifiers from multiple different authorities are available, delimit these identifiers with the pipe character '|'. For example, if a well were known to the Arizona Geological Survey (AZGS) by the id number 1337, the identifier string would be azgs:1337. Any such prefixes used to scope identifiers should be explained in the dataset metadata.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SpecimenURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for sample; should include protocol prefix with known meaning, delimited by a ':' (colon), e.g. igsn:24623570 or http://resources.usgin.org/uri-gin/AZGS/sample/24623570.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="ParentSampleURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Identifier for a sample from which this specimen was sub-sampled. E.g. if a piece from a registered core is registered as a separate sample, this would be the identifier for the core.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Label" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Short text string for labeling the feature on maps. Can be the same as feature name. A label may be an OtherLocationName, OtherID or the Name or some combination.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SpecimenCollectionDate" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date on which specimen sample was collected. Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SpecimenLabel" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Short text string to identify/characterize the sample used in this observation; may include one or more sample names as provided by the sample collector or analyzing laboratory.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SpecimenDescription" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Free text field for any additional observations or other information regarding the feature (size, weight, quality, lithology, locality, etc).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampleCollectionMethod" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Method used to collect specimen; may be hand sample, core or drill cuttings.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SpecimenType" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Term to describe the type of specimen. Use term from list of Specimen types. If the specimen type collected is not present on this list, add the specimen type to the list in the example column.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SpecimenCollector" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Free text specification of person, organization, affiliation, address, etc. for party that originally collected specimen. Include contact information if available.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MaterialClass" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Category from simple material classification scheme e.g. rock, sediment, aqueous liquid, other liquid, gas, biological material. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LithologyTerms" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Description of the lithology of surface geology or geologic column for well interval, e.g. arkose, granite, limestone, sandstone, schist. Recommend using CGI simple lithology vocabulary (see tab in this workbook). Use to account for EarthChem Material, EarthChem Type, EarthChem Composition, alluvium, 36-40': gravels; etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RockName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Free text name for lithology category of sample, e.g. biotite-hornblende granite, lithofeldspathic sandstone, calcareous arkose, biotite schist.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampledGeologicUnit" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Name of geologic unit that was sampled. Include hierarchy of names if the unit is part of a higher-rank geologic unit, e.g. Group name/Formation name, or Formation/Member, or Group/ Formation. Spell out unit names in full.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampledGeologicUnitAge" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Age of a sample as described by the stratigraphic  era, period, etc. “Cretaceous”; “Upper Miocene”.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="County" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Required. County name. If unknown or not applicable use 'missing'. If offshore, specify 'offshore' in this field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="State" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Required. State name without abbreviations. If unknown or not applicable use 'missing'. For offshore locations, specify the governing or nearest state and list the county as 'offshore'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LatDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Latitude coordinate for the surface location of the feature; values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LongDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Longitude coordinate for the surface location of the feature; values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SRS" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The spatial reference system. It is recommended that an EPSG code be used to identify the SRS used to specify the location.  If an EPSG code is used, identify it as such with the prefix 'EPSG:' For common EPSG codes, see the Data Valid Terms tab. EPSG:4326 is the identifier for WGS84, and should be the text in this field. EPSG stands for European Petroleum Survey Group. EPSSG codes can be dereferenced by putting the code in this URL (replace 4326) http://spatialreference.org/ref/epsg/4326/.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Information on how the original location was determined, e.g.: 1:250,000 map, gps unit, Google Earth, PLSS Conversion, Spatial Datum Conversion, e.g., NAD27 to WGS84.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LocalityTerms" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Additional information or more geographic names associated with sample collection location; if multiple names supplied, delimit with pipe '|' character, e.g. Arizona | La Paz County | Harquahala Mountains | Browns Canyon.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DatumElevation" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The point of reference against which elevation measurements are made. Best practice: use mean sea level (MSL) as datum.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Elevation" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Elevation at ground level the sample came from. 3 decimal places is recommended by the USGS (OFR 02-463, p.6). Elevations should be reported relative to mean sea level (MSL).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ElevationUnits" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Units used to report all elevation and depth information.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Citation" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Free text citation, using some standard journal format, that identifies a publication in which this sample was defined.  For samples that are not described in publications, text description of where sample came from should include name of person or organization to contact to access sample.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Source" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Mandatory. Short text explanation of source of information defining feature; may be author-date type citation, but should include some indication of how digital data originated. If unpublished data, provide researcher name, date and research institution for proper citation. Separate multiple citations with pipe ('|') character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MetadataURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI identifying (and ideally dereferencing to get) a full formal metadata record for the observation report. A time series of observations may all reference the same metadata record that provides contact information and details on procedure, etc.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This may be one to many http links to resources (logs, pictures or other documents if available online. Should be an http:// address (URL)) related to the observation described in each record. Delimit multiple values with the pipe '|' character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="AnalysisType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Type of analysis used to obtain the results in this record.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="AnalysisDate" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date for the record (date on which measurement or test was made. Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Laboratory" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If a Laboratory performed the analysis, include name and address here.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ProcedureSummary" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Text description of how the measurement was made - instrumentation, logging rate, correction or extrapolation process, how time since circulation was determined, etc. Data provider should indicate QA/QC performed on the data, including individual or institution, time frame and depth of quality check.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UpdateTimeStamp" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>Date of last time line of data was updated or corrected by the service provider.(Format: 2012-06-22T00:00).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="USeriesChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Pb210_Ra226" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb210_u238" type="xs:double" minOccurs="0"/>
+					<xs:element name="Po210_Rn222" type="xs:double" minOccurs="0"/>
+					<xs:element name="Po210_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ra226_Th228" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ra226_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ra228_Th232" type="xs:double" minOccurs="0"/>
+					<xs:element name="Rn222_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th230_Ra226" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th230_Ra232" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th230_U238" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th232_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th232_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th232_U238" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th238_U238" type="xs:double" minOccurs="0"/>
+					<xs:element name="U234_U238" type="xs:double" minOccurs="0"/>
+					<xs:element name="U235_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="U238_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="U238_Th230" type="xs:double" minOccurs="0"/>
+					<xs:element name="U238_Th232" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IsotopeSeriesChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Be10_Be" type="xs:double" minOccurs="0"/>
+					<xs:element name="Be10_Be9" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cl36_Cl" type="xs:double" minOccurs="0"/>
+					<xs:element name="Epsilon_Nd" type="xs:double" minOccurs="0"/>
+					<xs:element name="Hf176_Hf177" type="xs:double" minOccurs="0"/>
+					<xs:element name="K40_Ar36" type="xs:double" minOccurs="0"/>
+					<xs:element name="Lu176_Hf177" type="xs:double" minOccurs="0"/>
+					<xs:element name="Nd143_Nd144" type="xs:double" minOccurs="0"/>
+					<xs:element name="Os184_Os188" type="xs:double" minOccurs="0"/>
+					<xs:element name="Os186_Os188" type="xs:double" minOccurs="0"/>
+					<xs:element name="Os187_Os186" type="xs:double" minOccurs="0"/>
+					<xs:element name="Os187_Os188" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb206_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb206_Pb207" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb206_Pb208" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb207_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb208_Pb204" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb208_Pb206" type="xs:double" minOccurs="0"/>
+					<xs:element name="Rb87_Sr86" type="xs:double" minOccurs="0"/>
+					<xs:element name="Re187_Os186" type="xs:double" minOccurs="0"/>
+					<xs:element name="Re187_Os188" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sm147_Nd144" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sr87_Sr86" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TraceMetalsChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Ag_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="As_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ba_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Be_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Bi_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Co_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cs_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cu_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Dy_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ga_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ge_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="In_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Mo_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Nb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ni_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Rb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sc_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sn_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ta_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ti_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="U_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="V_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="W_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Y_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Zn_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Zr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WholeRockChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Al2O3_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="CaO_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="Fe2O3_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="H2O_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="K2O_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="LOI_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="MgO_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="MnO_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="Na2O_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="P2O5_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="SiO2_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="TiO2_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="Total_WtPct" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StableIsotopeChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Delta_18O" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RareEarthChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Ce_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Dy_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Er_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Eu_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Gd_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Hf_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ho_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="La_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Lu_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Nd_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pm_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pr_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sc_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sm_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ta_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Tb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Tm_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Y_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Yb_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="VolatileChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="CO2" type="xs:double" minOccurs="0"/>
+					<xs:element name="F" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cl" type="xs:double" minOccurs="0"/>
+					<xs:element name="H" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NobleGasChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="Ar36_Ar39" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar37_Ar39" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar37_Ar40" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar38_Ar36" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar39_Ar36" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar40" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar40_Ar36" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar40_Ar39" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ar40_K40" type="xs:double" minOccurs="0"/>
+					<xs:element name="He3_He4" type="xs:double" minOccurs="0"/>
+					<xs:element name="He4_He3" type="xs:double" minOccurs="0"/>
+					<xs:element name="He4_Ne20" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr78_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr80_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr82_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr83_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Kr86_Kr84" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ne20_Ne22" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ne21_Ne20" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ne21_Ne22" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ne22_Ne20" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe124_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe124_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe126_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe126_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe128_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe128_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe129_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe129_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe130_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe131_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe131_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe132_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe134_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe134_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe136_Xe130" type="xs:double" minOccurs="0"/>
+					<xs:element name="Xe136_Xe132" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SingleAnalyteChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="analyte" type="xs:string" minOccurs="0"/>
+					<xs:element name="result" type="xs:string" minOccurs="0"/>
+					<xs:element name="units" type="xs:string" minOccurs="0"/>
+					<xs:element name="uncertainty" type="xs:string" minOccurs="0"/>
+					<xs:element name="qualifier" type="xs:string" minOccurs="0"/>
+					<xs:element name="measurementMethod" type="xs:string" minOccurs="0"/>
+					<xs:element name="Au_ppb" type="xs:double" minOccurs="0"/>
+					<xs:element name="Br_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cd_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Hf_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Hg_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Hg_ppb" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ir_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="S_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Se_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ta_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Tl_ppm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MineralRecoveryBrineChemType">
+		<xs:complexContent>
+			<xs:extension base="aasg:SampleAnalysisCommonType">
+				<xs:sequence>
+					<xs:element name="UTMZone" type="xs:string" minOccurs="0"/>
+					<xs:element name="UTME" type="xs:string" minOccurs="0"/>
+					<xs:element name="UTMN" type="xs:string" minOccurs="0"/>
+					<xs:element name="Units" type="xs:string" minOccurs="0"/>
+					<xs:element name="FluidOrigin" type="xs:string" minOccurs="0"/>
+					<xs:element name="GoethermalArea" type="xs:string" minOccurs="0"/>
+					<xs:element name="REE_Method" type="xs:string" minOccurs="0"/>
+					<xs:element name="pH" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ac" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ag" type="xs:double" minOccurs="0"/>
+					<xs:element name="Am" type="xs:double" minOccurs="0"/>
+					<xs:element name="Au" type="xs:double" minOccurs="0"/>
+					<xs:element name="B" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ba" type="xs:double" minOccurs="0"/>
+					<xs:element name="Bk" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ce" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cf" type="xs:double" minOccurs="0"/>
+					<xs:element name="Cm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Dy" type="xs:double" minOccurs="0"/>
+					<xs:element name="Er" type="xs:double" minOccurs="0"/>
+					<xs:element name="Es" type="xs:double" minOccurs="0"/>
+					<xs:element name="Eu" type="xs:double" minOccurs="0"/>
+					<xs:element name="Fm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ga" type="xs:double" minOccurs="0"/>
+					<xs:element name="Gd" type="xs:double" minOccurs="0"/>
+					<xs:element name="Hf" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ho" type="xs:double" minOccurs="0"/>
+					<xs:element name="In" type="xs:double" minOccurs="0"/>
+					<xs:element name="La" type="xs:double" minOccurs="0"/>
+					<xs:element name="Li" type="xs:double" minOccurs="0"/>
+					<xs:element name="Lo" type="xs:double" minOccurs="0"/>
+					<xs:element name="Lu" type="xs:double" minOccurs="0"/>
+					<xs:element name="Lr" type="xs:double" minOccurs="0"/>
+					<xs:element name="Md" type="xs:double" minOccurs="0"/>
+					<xs:element name="Mn" type="xs:double" minOccurs="0"/>
+					<xs:element name="Na" type="xs:double" minOccurs="0"/>
+					<xs:element name="Nb" type="xs:double" minOccurs="0"/>
+					<xs:element name="Nd" type="xs:double" minOccurs="0"/>
+					<xs:element name="No" type="xs:double" minOccurs="0"/>
+					<xs:element name="Np" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pa" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pd" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pr" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pt" type="xs:double" minOccurs="0"/>
+					<xs:element name="Pu" type="xs:double" minOccurs="0"/>
+					<xs:element name="Re" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sc" type="xs:double" minOccurs="0"/>
+					<xs:element name="Si" type="xs:double" minOccurs="0"/>
+					<xs:element name="Sm" type="xs:double" minOccurs="0"/>
+					<xs:element name="Ta" type="xs:double" minOccurs="0"/>
+					<xs:element name="Te" type="xs:double" minOccurs="0"/>
+					<xs:element name="Tb" type="xs:double" minOccurs="0"/>
+					<xs:element name="Tc" type="xs:double" minOccurs="0"/>
+					<xs:element name="Th" type="xs:double" minOccurs="0"/>
+					<xs:element name="Tm" type="xs:double" minOccurs="0"/>
+					<xs:element name="U" type="xs:double" minOccurs="0"/>
+					<xs:element name="Y" type="xs:double" minOccurs="0"/>
+					<xs:element name="Yb" type="xs:double" minOccurs="0"/>
+					<xs:element name="Zn" type="xs:double" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
